@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.MongoDBProject.Entity.UserEntity;
 import com.MongoDBProject.Service.UserService;
@@ -41,5 +42,18 @@ public class TestController {
     public void deleteUser(@PathVariable String id) {
         userService.deleteUser(id);
     }
+    @GetMapping("/findById")
+    public UserEntity findUserById(@RequestParam String id) {
+        return userService.findUserById(id);
+    }
 
+    @GetMapping("/findByName")
+    public UserEntity findUserByName(@RequestParam String name) {
+        return userService.findUserByName(name);
+    }
+
+    @GetMapping("/findByPassword")
+    public UserEntity findUserByPassword(@RequestParam String email) {
+        return userService.findUserByPassword(email);
+    }
 }

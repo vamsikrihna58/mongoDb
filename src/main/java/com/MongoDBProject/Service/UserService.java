@@ -1,6 +1,7 @@
 package com.MongoDBProject.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -36,5 +37,29 @@ public class UserService {
 	    public void deleteUser(String id) {
 	        userRepository.deleteById(id);
 	    }
+	    public UserEntity findUserById(String id) {
+	        Optional<UserEntity> user = userRepository.findById(id);
+	        if (user == null) {
+	            throw new RuntimeException("User not found with id: " + id);
+	        }
+	        return user.get();
+	    }
+
+	    public UserEntity findUserByName(String name) {
+	        UserEntity user = userRepository.findByName(name);
+	        if (user == null) {
+	            throw new RuntimeException("User not found with name: " + name);
+	        }
+	        return user;
+	    }
+
+	    public UserEntity findUserByPassword(String email) {
+	        UserEntity user = userRepository.findByEmail(email);
+	        if (user == null) {
+	            throw new RuntimeException("User not found with the given password.");
+	        }
+	        return user;
+	    }
+
 
 }
